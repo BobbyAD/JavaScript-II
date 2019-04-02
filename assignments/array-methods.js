@@ -70,7 +70,7 @@ console.log(allCaps);
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = runners.filter((arr) => {
-    return arr.shirt_size = 'L';
+    return arr.shirt_size == 'L';
 });
 console.log(largeShirts);
 
@@ -85,7 +85,48 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// How many people want medium shirts?
+let medShirtsSum = runners.filter((arr) => {
+    return arr.shirt_size == 'M';
+}).length;
+
+console.log(medShirtsSum);
 
 // Problem 2
+// Format an array that has the full name in caps and their ID number for printing. Example result: {'name': 'GEORGE LOPEZ', 'id': 10}
+let printArray = runners.map((arr) => {
+    return {'name': arr.first_name.toUpperCase() + ' ' + arr.last_name.toUpperCase(), 'id': arr.id};
+})
+
+console.log(printArray);
 
 // Problem 3
+// Give me an array of each shirt size and how many we need to order.
+
+let shirtSizes = runners.map((arr) => {
+    return arr.shirt_size;
+});
+console.log(shirtSizes);
+
+let shirtNoDupes = [];
+
+// Removing duplicates
+for (let i = 0; i < shirtSizes.length; i++) {
+    if (!shirtNoDupes.includes(shirtSizes[i])) {
+        shirtNoDupes.push(shirtSizes[i]);
+    }
+}
+shirtNoDupes.sort();
+
+let shirtCount = [];
+
+for (let i = 0; i < shirtNoDupes.length; i++) {
+    let count = 0;
+    for (let n = 0; n < shirtSizes.length; n++) {
+        if (shirtNoDupes[i] == shirtSizes[n]) {
+            count++;
+        }
+    }
+    shirtCount.push(count);
+}
+
