@@ -127,6 +127,7 @@ for (let i = 0; i < shirtNoDupes.length; i++) {
             count++;
         }
     }
-    shirtCount.push(count);
+    shirtCount.push({'Size': shirtNoDupes[i], 'Number': count});
 }
 
+console.log(shirtCount);
